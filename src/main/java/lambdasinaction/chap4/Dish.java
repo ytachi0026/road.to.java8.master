@@ -1,6 +1,6 @@
 package lambdasinaction.chap4;
 import java.util.*;
-
+//Dish is an immutable class
 public class Dish {
 
     private final String name;
