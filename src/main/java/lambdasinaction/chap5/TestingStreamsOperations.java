@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TestingStreamsOperations {
@@ -37,4 +38,16 @@ public class TestingStreamsOperations {
     }
 
 
+    @Test
+    public void workingWithFindFirst(){
+        List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
+
+//        Optional<Integer> result  = someNumbers.stream().filter(n -> (n*n)%3 == 0).findFirst();
+        Optional<Integer> result  = someNumbers.stream().map(n -> n*n).filter(n -> n %3 ==0).findFirst();
+
+        result.ifPresent(System.out::println);
+
+
+
+    }
 }

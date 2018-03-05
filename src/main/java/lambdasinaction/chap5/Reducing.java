@@ -1,5 +1,6 @@
 package lambdasinaction.chap5;
 import lambdasinaction.chap4.*;
+import org.junit.Test;
 
 import java.util.stream.*;
 import java.util.*;
@@ -27,5 +28,16 @@ public class Reducing{
                            .map(Dish::getCalories)
                            .reduce(0, Integer::sum);
         System.out.println("Number of calories:" + calories);
+    }
+
+
+    @Test
+    public void quiz5_3(){
+        //How would you count the number of dishes in a stream using the map and reduce methods?
+
+        Integer result = Dish.menu.stream().map(d -> 1).reduce(0, Integer::sum);
+        System.out.println(result);
+
+
     }
 }
