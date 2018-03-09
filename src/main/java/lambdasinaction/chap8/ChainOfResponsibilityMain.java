@@ -23,6 +23,27 @@ public class ChainOfResponsibilityMain {
         System.out.println(result2);
     }
 
+
+    static private abstract class ProcessingYObject<T>{
+        protected ProcessingObject<T> successor;
+
+        public void setSuccessor(ProcessingObject<T> successor){
+            this.successor = successor;
+        }
+
+        abstract protected T handleWork(T input);
+
+        public T handle(T input){
+            T r = handleWork(input);
+            if(successor != null){
+                return successor.handle(input);
+            }
+            return r;
+        }
+    }
+
+
+
     static private abstract class ProcessingObject<T> {
         protected ProcessingObject<T> successor;
 

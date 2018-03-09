@@ -1,5 +1,7 @@
 package lambdasinaction.chap6;
 
+import org.junit.Test;
+
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
@@ -46,16 +48,27 @@ public class Grouping {
     }
 
     private static Map<Dish.Type, Long> countDishesInGroups() {
+
+        System.out.println(menu.stream().collect(groupingBy(Dish::getType, counting())));
+
         return menu.stream().collect(groupingBy(Dish::getType, counting()));
     }
 
     private static Map<Dish.Type, Optional<Dish>> mostCaloricDishesByType() {
+        Comparator<Dish> comparator = Comparator.comparing(Dish::getCalories);
+        System.out.println(menu
+                .stream()
+                .collect(
+                        groupingBy(Dish::getType, maxBy(comparator))
+                ));
         return menu.stream().collect(
                 groupingBy(Dish::getType,
                         reducing((Dish d1, Dish d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2)));
     }
 
     private static Map<Dish.Type, Dish> mostCaloricDishesByTypeWithoutOprionals() {
+
+
         return menu.stream().collect(
                 groupingBy(Dish::getType,
                         collectingAndThen(
@@ -64,6 +77,11 @@ public class Grouping {
     }
 
     private static Map<Dish.Type, Integer> sumCaloriesByType() {
+
+        System.out.println(menu
+        .stream()
+        .collect(groupingBy(Dish::getType, summingInt(Dish::getCalories))));
+
         return menu.stream().collect(groupingBy(Dish::getType,
                 summingInt(Dish::getCalories)));
     }
@@ -75,5 +93,15 @@ public class Grouping {
                         else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
                         else return CaloricLevel.FAT; },
                         toSet() )));
+    }
+
+    @Test
+    public void quiz6_2(){
+        System.out.println(
+                menu
+                .stream()
+                .collect(partitioningBy(Dish::isVegetarian, partitioningBy(d -> d.getCalories() > 500)))
+        );
+
     }
 }

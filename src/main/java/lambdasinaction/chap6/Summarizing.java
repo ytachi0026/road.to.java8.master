@@ -1,7 +1,10 @@
 package lambdasinaction.chap6;
 
+import org.junit.Test;
+
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 import static lambdasinaction.chap6.Dish.menu;
@@ -10,7 +13,7 @@ public class Summarizing {
 
     public static void main(String ... args) {
         System.out.println("Nr. of dishes: " + howManyDishes());
-        System.out.println("The most caloric dish is: " + findMostCaloricDish());
+//        System.out.println("The most caloric dish is: " + findMostCaloricDish());
         System.out.println("The most caloric dish is: " + findMostCaloricDishUsingComparator());
         System.out.println("Total calories in menu: " + calculateTotalCalories());
         System.out.println("Average calories in menu: " + calculateAverageCalories());
@@ -24,8 +27,19 @@ public class Summarizing {
         return menu.stream().collect(counting());
     }
 
-    private static Dish findMostCaloricDish() {
-        return menu.stream().collect(reducing((d1, d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2)).get();
+    @Test
+    public void Quiz6_1(){
+//        String shortMenu = menu.stream()
+//                .collect( reducing( (d1, d2) -> d1.getName() + d2.getName() ) ).get();
+    }
+
+    @Test
+    public void findMostCaloricDish() {
+        Comparator<Dish> comparator = Comparator.comparingInt(Dish::getCalories);
+
+        System.out.println(menu.stream().collect(Collectors.maxBy(comparator)));
+
+        System.out.println(menu.stream().collect(reducing((d1, d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2)).get());
     }
 
     private static Dish findMostCaloricDishUsingComparator() {

@@ -30,13 +30,28 @@ public class ObserverMain {
     }
 
 
-    interface Observer{
+    interface  Observer{
         void inform(String tweet);
     }
 
     interface Subject{
         void registerObserver(Observer o);
         void notifyObservers(String tweet);
+    }
+
+
+    static private class Feeder implements Subject{
+        private List<Observer> observers = new ArrayList<>();
+
+        @Override
+        public void registerObserver(Observer o) {
+            observers.add(o);
+        }
+
+        @Override
+        public void notifyObservers(String tweet) {
+            observers.forEach(o -> o.inform(tweet));
+        }
     }
 
     static private class NYTimes implements Observer{

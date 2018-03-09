@@ -18,6 +18,23 @@ public class StrategyMain {
         System.out.println(v4.validate("bbbb"));
     }
 
+    interface ValidatingStrategy{
+        boolean test(String t);
+    }
+    static private class IsDirtyWord implements ValidatingStrategy{
+        @Override
+        public boolean test(String t) {
+            return t.contains("anal");
+        }
+    }
+    static private class IsNormalWord implements ValidatingStrategy{
+
+        @Override
+        public boolean test(String t) {
+            return !t.contains("sex");
+        }
+    }
+
     interface ValidationStrategy {
         public boolean execute(String s);
     }

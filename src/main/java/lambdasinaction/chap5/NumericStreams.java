@@ -1,5 +1,6 @@
 package lambdasinaction.chap5;
 import lambdasinaction.chap4.*;
+import org.junit.Test;
 
 import java.util.stream.*;
 import java.util.*;
@@ -52,6 +53,44 @@ public class NumericStreams{
    
     public static boolean isPerfectSquare(int n){
         return Math.sqrt(n) % 1 == 0;
+    }
+
+    @Test
+    public void pythagoreanTriples(){
+        Stream<int[]> pythagoreanTriples =
+                IntStream.rangeClosed(1, 100).boxed()
+                        .flatMap(a -> IntStream.rangeClosed(a, 100)
+                                .filter(b -> Math.sqrt(a*a + b*b) % 1 == 0).boxed()
+                                .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
+
+        pythagoreanTriples.forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2]));
+
+
+        Stream<int[]> result = IntStream.rangeClosed(1, 100)
+                .boxed()
+                .flatMap(  a -> IntStream.rangeClosed(a , 100)
+                    .filter(b -> Math.sqrt(a*a + b*b )  % 1 == 0)
+                    .boxed()
+                    .map(b -> new int[] { a, b, (int) Math.sqrt(a*a + b*b)  }) );
+
+        result.limit(5)
+                .forEach(r -> System.out.println(r[0] + "," + r[1] + "=" + r[2]));
+
+
+    }
+
+    @Test
+    public void testIntStream(){
+        OptionalInt result = IntStream.rangeClosed(1, 100)
+                .reduce(Integer::sum);
+
+        int result1 = IntStream.rangeClosed(1,100)
+                .sum();
+        System.out.println(result);
+        System.out.println(result1);
+        result = IntStream.rangeClosed(1, 100)
+                .reduce((a,b) -> a + b);
+        System.out.println(result);
     }
 
 }
