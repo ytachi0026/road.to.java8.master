@@ -1,5 +1,7 @@
 package lambdasinaction.chap12;
 
+import org.junit.Test;
+
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
@@ -15,10 +17,7 @@ import java.time.Month;
 import java.time.chrono.JapaneseDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -32,13 +31,14 @@ public class DateTimeExamples {
     };
 
     public static void main(String[] args) {
-        useOldDate();
-        useLocalDate();
-        useTemporalAdjuster();
-        useDateFormatter();
+//        useOldDate();
+//        useLocalDate();
+//        useTemporalAdjuster();
+//        useDateFormatter();
     }
 
-    private static void useOldDate() {
+    @Test
+    public void useOldDate() {
         Date date = new Date(114, 2, 18);
         System.out.println(date);
 
@@ -49,9 +49,12 @@ public class DateTimeExamples {
         System.out.println(calendar);
     }
 
-    private static void useLocalDate() {
-        LocalDate date = LocalDate.of(2014, 3, 18);
+    @Test
+    public void useLocalDate() {
+        LocalDate date = LocalDate.of(2018, 3, 15);
         int year = date.getYear(); // 2014
+        date.get(ChronoField.YEAR);
+
         Month month = date.getMonth(); // MARCH
         int day = date.getDayOfMonth(); // 18
         DayOfWeek dow = date.getDayOfWeek(); // TUESDAY
@@ -64,6 +67,7 @@ public class DateTimeExamples {
         int d = date.get(ChronoField.DAY_OF_MONTH);
 
         LocalTime time = LocalTime.of(13, 45, 20); // 13:45:20
+        time.getHour();
         int hour = time.getHour(); // 13
         int minute = time.getMinute(); // 45
         int second = time.getSecond(); // 20
@@ -72,9 +76,13 @@ public class DateTimeExamples {
         LocalDateTime dt1 = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45, 20); // 2014-03-18T13:45
         LocalDateTime dt2 = LocalDateTime.of(date, time);
         LocalDateTime dt3 = date.atTime(13, 45, 20);
-        LocalDateTime dt4 = date.atTime(time);
-        LocalDateTime dt5 = time.atDate(date);
+        LocalDateTime dt4 = date.atTime(time);//OJO it is a date defines, then you define the time
+        LocalDateTime dt5 = time.atDate(date);//OJO it is a time defined, then you assign a date
         System.out.println(dt1);
+        System.out.println("atDate");
+        System.out.println(dt5);
+        System.out.println("atTime");
+        System.out.println(dt4);
 
         LocalDate date1 = dt1.toLocalDate();
         System.out.println(date1);
@@ -83,6 +91,8 @@ public class DateTimeExamples {
 
         Instant instant = Instant.ofEpochSecond(44 * 365 * 86400);
         Instant now = Instant.now();
+        System.out.println("Now of machine");
+        System.out.println(now);
 
         Duration d1 = Duration.between(LocalTime.of(13, 45, 10), time);
         Duration d2 = Duration.between(instant, now);
@@ -96,8 +106,34 @@ public class DateTimeExamples {
         System.out.println(japaneseDate);
     }
 
-    private static void useTemporalAdjuster() {
-        LocalDate date = LocalDate.of(2014, 3, 18);
+    @Test
+    public void Quiz12_2(){
+        LocalDate date = LocalDate.now().plus(2,ChronoUnit.DAYS);
+
+        System.out.println(date.with(new NextWorkingDayY()));
+
+    }
+
+    private static class NextWorkingDayY implements TemporalAdjuster{
+        @Override
+        public Temporal adjustInto(Temporal temporal) {
+            int day = temporal.get(ChronoField.DAY_OF_WEEK);
+             DayOfWeek targetDay = DayOfWeek.of(day);
+
+            int dayToAdd = 1;
+            if(targetDay == DayOfWeek.FRIDAY) {
+                dayToAdd = 3;
+            } else if (targetDay == DayOfWeek.SATURDAY) {
+                dayToAdd = 2;
+            }
+            return temporal.plus(dayToAdd, ChronoUnit.DAYS);
+        }
+    }
+
+
+    @Test
+    public void useTemporalAdjuster() {
+        LocalDate date = LocalDate.of(2018, 3, 15);
         date = date.with(nextOrSame(DayOfWeek.SUNDAY));
         System.out.println(date);
         date = date.with(lastDayOfMonth());
@@ -112,6 +148,7 @@ public class DateTimeExamples {
 
         date = date.with(nextOrSame(DayOfWeek.FRIDAY));
         System.out.println(date);
+        //it is the same logic as the NextWorkingDay class however we are using the power of the sexy lambda
         date = date.with(temporal -> {
             DayOfWeek dow = DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK));
             int dayToAdd = 1;
@@ -132,6 +169,9 @@ public class DateTimeExamples {
             return temporal.plus(dayToAdd, ChronoUnit.DAYS);
         }
     }
+
+
+    
 
     private static void useDateFormatter() {
         LocalDate date = LocalDate.of(2014, 3, 18);

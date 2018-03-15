@@ -27,6 +27,22 @@ public class ReadPositiveIntParam {
         assertEquals(0, readDurationWithOptional(props, "d"));
     }
 
+    public static int readDurationYtalo(Properties props, String name) {
+        return Optional.ofNullable(props.getProperty(name))
+                .flatMap(ReadPositiveIntParam::transformToInt)
+                .filter(p -> p > 0)
+                .orElse(0);
+    }
+
+    public static Optional<Integer> transformToInt(String value) {
+        try {
+            return Optional.of(Integer.parseInt(value));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
+
     public static int readDurationImperative(Properties props, String name) {
         String value = props.getProperty(name);
         if (value != null) {
@@ -35,7 +51,8 @@ public class ReadPositiveIntParam {
                 if (i > 0) {
                     return i;
                 }
-            } catch (NumberFormatException nfe) { }
+            } catch (NumberFormatException nfe) {
+            }
         }
         return 0;
     }
