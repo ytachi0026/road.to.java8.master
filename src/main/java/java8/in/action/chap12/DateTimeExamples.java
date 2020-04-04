@@ -2,9 +2,6 @@ package java8.in.action.chap12;
 
 import org.junit.Test;
 
-import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
-import static java.time.temporal.TemporalAdjusters.nextOrSame;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -17,10 +14,16 @@ import java.time.Month;
 import java.time.chrono.JapaneseDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.*;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjuster;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
 public class DateTimeExamples {
 
@@ -171,7 +174,7 @@ public class DateTimeExamples {
     }
 
 
-    
+
 
     private static void useDateFormatter() {
         LocalDate date = LocalDate.of(2014, 3, 18);

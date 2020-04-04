@@ -1,8 +1,9 @@
 package java8.in.action.chap7;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class WordCount {
 

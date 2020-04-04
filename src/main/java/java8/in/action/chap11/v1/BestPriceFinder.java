@@ -1,5 +1,8 @@
 package java8.in.action.chap11.v1;
 
+import java8.in.action.chap11.ExchangeService;
+import java8.in.action.chap11.ExchangeService.Money;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +16,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import java8.in.action.chap11.ExchangeService;
-import java8.in.action.chap11.ExchangeService.Money;
 
 public class BestPriceFinder {
 
@@ -66,7 +66,7 @@ public class BestPriceFinder {
             // Only the type of futurePriceInUSD has been changed to
             // CompletableFuture so that it is compatible with the
             // CompletableFuture::join operation below.
-            CompletableFuture<Double> futurePriceInUSD = 
+            CompletableFuture<Double> futurePriceInUSD =
                 CompletableFuture.supplyAsync(() -> shop.getPrice(product))
                 .thenCombine(
                     CompletableFuture.supplyAsync(
@@ -89,12 +89,12 @@ public class BestPriceFinder {
         ExecutorService executor = Executors.newCachedThreadPool();
         List<Future<Double>> priceFutures = new ArrayList<>();
         for (Shop shop : shops) {
-            final Future<Double> futureRate = executor.submit(new Callable<Double>() { 
+            final Future<Double> futureRate = executor.submit(new Callable<Double>() {
                 public Double call() {
                     return ExchangeService.getRate(Money.EUR, Money.USD);
                 }
             });
-            Future<Double> futurePriceInUSD = executor.submit(new Callable<Double>() { 
+            Future<Double> futurePriceInUSD = executor.submit(new Callable<Double>() {
                 public Double call() {
                     try {
                         double priceInEUR = shop.getPrice(product);
@@ -124,7 +124,7 @@ public class BestPriceFinder {
             // Here, an extra operation has been added so that the shop name
             // is retrieved within the loop. As a result, we now deal with
             // CompletableFuture<String> instances.
-            CompletableFuture<String> futurePriceInUSD = 
+            CompletableFuture<String> futurePriceInUSD =
                 CompletableFuture.supplyAsync(() -> shop.getPrice(product))
                 .thenCombine(
                     CompletableFuture.supplyAsync(

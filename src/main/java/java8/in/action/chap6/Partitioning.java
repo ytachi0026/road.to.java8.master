@@ -1,9 +1,14 @@
 package java8.in.action.chap6;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static java.util.Comparator.comparingInt;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.maxBy;
+import static java.util.stream.Collectors.partitioningBy;
 import static java8.in.action.chap6.Dish.menu;
 
 public class Partitioning {

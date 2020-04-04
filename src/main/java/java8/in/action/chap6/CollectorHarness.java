@@ -1,6 +1,6 @@
 package java8.in.action.chap6;
 
-import java.util.function.*;
+import java.util.function.Consumer;
 
 public class CollectorHarness {
 

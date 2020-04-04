@@ -1,11 +1,11 @@
 package java8.in.action.chap11;
 
-import static java8.in.action.chap11.Util.delay;
-import static java8.in.action.chap11.Util.format;
-
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+
+import static java8.in.action.chap11.Util.delay;
+import static java8.in.action.chap11.Util.format;
 
 public class AsyncShop {
 

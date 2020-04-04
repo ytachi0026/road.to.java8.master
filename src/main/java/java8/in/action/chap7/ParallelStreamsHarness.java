@@ -1,7 +1,7 @@
 package java8.in.action.chap7;
 
-import java.util.concurrent.*;
-import java.util.function.*;
+import java.util.concurrent.ForkJoinPool;
+import java.util.function.Function;
 
 public class ParallelStreamsHarness {
 

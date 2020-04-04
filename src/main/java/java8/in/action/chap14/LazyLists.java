@@ -1,7 +1,7 @@
 package java8.in.action.chap14;
 
-import java.util.function.Supplier;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class LazyLists {
 

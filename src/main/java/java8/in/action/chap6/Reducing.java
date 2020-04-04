@@ -1,6 +1,6 @@
 package java8.in.action.chap6;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.reducing;
 
 public class Reducing {
 

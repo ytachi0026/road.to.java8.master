@@ -1,13 +1,15 @@
 package java8.in.action.appc;
 
 import java8.in.action.chap6.Dish;
-import lambdasinaction.chap6.*;
 
-import static java.util.stream.Collectors.*;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.reducing;
 import static java8.in.action.chap6.Dish.menu;
-
-import java.util.*;
-import java.util.stream.*;
 
 public class StreamForkerExample {
 

@@ -1,9 +1,9 @@
 package java8.in.action.chap11;
 
+import java.util.Random;
+
 import static java8.in.action.chap11.Util.delay;
 import static java8.in.action.chap11.Util.format;
-
-import java.util.Random;
 
 public class Shop {
 

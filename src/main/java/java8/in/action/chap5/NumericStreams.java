@@ -1,15 +1,18 @@
 package java8.in.action.chap5;
+
 import java8.in.action.chap4.Dish;
-import lambdasinaction.chap4.*;
 import org.junit.Test;
 
-import java.util.stream.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class NumericStreams{
 
     public static void main(String...args){
-    
+
         List<Integer> numbers = Arrays.asList(3,4,5,1,2);
 
         Arrays.stream(numbers.toArray()).forEach(System.out::println);
@@ -44,12 +47,12 @@ public class NumericStreams{
                IntStream.rangeClosed(1, 100).boxed()
                         .flatMap(a -> IntStream.rangeClosed(a, 100)
                                                .filter(b -> Math.sqrt(a*a + b*b) % 1 == 0).boxed()
-                                               .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));       
+                                               .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
 
-        pythagoreanTriples.forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2])); 
+        pythagoreanTriples.forEach(t -> System.out.println(t[0] + ", " + t[1] + ", " + t[2]));
 
     }
-   
+
     public static boolean isPerfectSquare(int n){
         return Math.sqrt(n) % 1 == 0;
     }

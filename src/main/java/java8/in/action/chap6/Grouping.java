@@ -2,9 +2,21 @@ package java8.in.action.chap6;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.maxBy;
+import static java.util.stream.Collectors.partitioningBy;
+import static java.util.stream.Collectors.reducing;
+import static java.util.stream.Collectors.summingInt;
+import static java.util.stream.Collectors.toSet;
 
 public class Grouping {
 

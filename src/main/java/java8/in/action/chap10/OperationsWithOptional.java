@@ -1,9 +1,9 @@
 package java8.in.action.chap10;
 
-import java.util.*;
+import java.util.Optional;
 
-import static java.util.Optional.of;
 import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 public class OperationsWithOptional {
 

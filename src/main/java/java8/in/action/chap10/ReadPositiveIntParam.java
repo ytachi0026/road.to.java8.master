@@ -1,10 +1,13 @@
 package java8.in.action.chap10;
 
-import org.junit.*;
+import org.junit.Test;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Properties;
 
-import static java.util.Optional.*;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 import static org.junit.Assert.assertEquals;
 
 public class ReadPositiveIntParam {

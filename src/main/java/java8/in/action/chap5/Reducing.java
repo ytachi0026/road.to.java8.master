@@ -1,9 +1,11 @@
 package java8.in.action.chap5;
+
 import java8.in.action.chap4.Dish;
-import lambdasinaction.chap4.*;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class Reducing{
 

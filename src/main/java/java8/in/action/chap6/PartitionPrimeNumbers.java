@@ -1,11 +1,23 @@
 package java8.in.action.chap6;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
-import static java.util.stream.Collector.Characteristics.*;
+import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+import static java.util.stream.Collectors.partitioningBy;
 
 public class PartitionPrimeNumbers {
 

@@ -1,6 +1,7 @@
 package java8.in.action.chap7;
 
-import java.util.stream.*;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class ParallelStreams {
 

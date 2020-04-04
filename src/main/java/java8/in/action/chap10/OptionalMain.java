@@ -1,6 +1,6 @@
 package java8.in.action.chap10;
 
-import java.util.*;
+import java.util.Optional;
 
 public class OptionalMain {
 
